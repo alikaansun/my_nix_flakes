@@ -53,7 +53,7 @@
           name = "gitconfig";
           text = ''
             [user]
-              name = Python Dev Environment
+              name = alika
               email = python-dev@example.com
             [core]
               editor = vim
