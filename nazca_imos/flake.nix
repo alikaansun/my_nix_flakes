@@ -58,8 +58,7 @@
             [user]
               name = alika
               email = python-dev@example.com
-            [core]
-              editor = vim
+              # pull.rebase true
             [init]
               defaultBranch = main
             [color]
@@ -80,7 +79,9 @@
             
             # Set up temporary Git configuration for this shell
             export GIT_CONFIG_GLOBAL="${gitConfigFile}"
+            git config pull.rebase true
             echo "Custom Git configuration loaded"
+
             
             # Create and set up a virtual environment directory for editable installs
             export VIRTUAL_ENV_DISABLE_PROMPT=1
