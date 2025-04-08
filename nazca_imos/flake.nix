@@ -96,7 +96,7 @@
             export PYTHONPATH="$PWD:$PYTHONPATH"
             
             # Install nazca in development mode if it exists
-            NAZCA_PATH=~/Documents/Repos/nazca-0.6.1
+            NAZCA_PATH=~/Documents/Apps/nazca-0.6.1
             if [ -d "$NAZCA_PATH" ]; then
               echo "Installing nazca from $NAZCA_PATH"
               cd "$NAZCA_PATH"
@@ -107,6 +107,10 @@
               echo "Warning: Nazca path not found: $NAZCA_PATH"
             fi
             
+            # Launch VSCode in the nazca_imos directory
+            echo "Opening VSCode in /home/alik/Documents/Repos/nazca_imos"
+            code /home/alik/Documents/Repos/nazca_imos &
+
             echo "Development environment ready"
           '';
         };
