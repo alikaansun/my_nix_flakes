@@ -16,6 +16,8 @@
         pythonEnv = pkgs.python313.withPackages (ps: with ps; [
           decorator
           ipython
+          ipykernel
+          jupyter
           kiwisolver
           matplotlib
           matplotlib-inline
@@ -36,7 +38,6 @@
         devShells.default = pkgs.mkShell {
           buildInputs = [
             pythonEnv
-            pkgs.git
           ];
           
           shellHook = ''
