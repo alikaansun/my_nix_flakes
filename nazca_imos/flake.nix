@@ -56,8 +56,8 @@
           name = "gitconfig";
           text = ''
             [user]
-              name = alika
-              email = python-dev@example.com
+              name = Kaan
+              email = a.k.sunnetcioglu@tue.nl
               # pull.rebase true
             [init]
               defaultBranch = main
@@ -108,8 +108,8 @@
             fi
             
             # Launch VSCode in the nazca_imos directory
-            echo "Opening VSCode in /home/alik/Documents/Repos/nazca_imos"
-            code /home/alik/Documents/Repos/nazca_imos &
+            echo "Opening VSCode in ~/Documents/Repos/nazca_imos"
+            code ~/Documents/Repos/nazca_imos &
 
             echo "Development environment ready"
           '';
