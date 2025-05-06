@@ -49,6 +49,7 @@
           # Add dependencies for nazca if known
           pyclipper
           pyyaml
+          openpyxl
         ]);
 
         # Create a temporary gitconfig file
@@ -99,21 +100,37 @@
             NAZCA_PATH=~/Documents/Apps/nazca-0.6.1
             NAZCAIMOS_PATH=~/Documents/Repos/nazca_imos
       
-            if [ -d "$NAZCA_PATH" ]; then
-              echo "Installing nazca from $NAZCA_PATH"
-              pip install "$NAZCA_PATH"
-              python -c "import nazca; print(f'Nazca {nazca.__version__} successfully imported')"
+            # Check if nazca is already installed
+            if python -c "import nazca" &>/dev/null; then
+              NAZCA_VERSION=$(python -c "import nazca; print(nazca.__version__)")
+              echo "Nazca is already installed (version $NAZCA_VERSION)"
             else
-              echo "Warning: Nazca path not found: $NAZCA_PATH"
+              if [ -d "$NAZCA_PATH" ]; then
+                echo "Installing nazca from $NAZCA_PATH"
+                pip install "$NAZCA_PATH"
+                python -c "import nazca; print(f'Nazca {nazca.__version__} successfully imported')"
+              else
+                echo "Warning: Nazca path not found: $NAZCA_PATH"
+              fi
             fi
             
             # Launch VSCode in the nazca_imos directory
             echo "Opening VSCode in $NAZCAIMOS_PATH"
             code $NAZCAIMOS_PATH &
             cd "$NAZCAIMOS_PATH"
-            echo "Installing nazca_imos from $NAZCAIMOS_PATH"
-            python -m pip install -e .
-            echo "Development environment ready"
+            # Check if nazca_imos is already installed
+            if python -c "import nazca_imos" &>/dev/null; then
+              NAZCA_IMOS_VERSION=$(python -c "import nazca_imos; print(nazca_imos.__version__)")
+              echo "Nazca imos is already installed (version $NAZCA_IMOS_VERSION)"
+            else
+              echo "Installing nazca_imos from $NAZCAIMOS_PATH"
+              python -m pip install -e .
+              python -c "import nazca_imos; print(f'Nazca imos successfully imported')"
+            fi
+            # echo "Installing nazca_imos from $NAZCAIMOS_PATH"
+            # python -m pip install -e .
+            # python -c "import nazca_imos; print(f'Nazca imos successfully imported')"
+            # echo "Development environment ready"
           '';
         };
       }
