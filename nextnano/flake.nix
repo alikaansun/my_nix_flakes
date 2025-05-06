@@ -49,8 +49,13 @@
             echo "Python version: $(python --version)"
 
             # Install nextnanopy
-            python ./nextnanopy/setup.py install
-
+            mkdir -p .local
+            cd nextnanopy
+            python setup.py install --prefix=$(pwd)/../.local
+            cd ..
+            export PYTHONPATH=$PYTHONPATH:$(pwd)/.local/lib/python*/site-packages
+            echo "nextnanopy installed to .local directory"
+            
             # Create a directory for Jupyter notebooks if it doesn't exist
             mkdir -p notebooks
             

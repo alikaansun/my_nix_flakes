@@ -97,20 +97,22 @@
             
             # Install nazca in development mode if it exists
             NAZCA_PATH=~/Documents/Apps/nazca-0.6.1
+            NAZCAIMOS_PATH=~/Documents/Repos/nazca_imos
+      
             if [ -d "$NAZCA_PATH" ]; then
               echo "Installing nazca from $NAZCA_PATH"
-              cd "$NAZCA_PATH"
-              python -m pip install -e .
-              cd -
+              pip install "$NAZCA_PATH"
               python -c "import nazca; print(f'Nazca {nazca.__version__} successfully imported')"
             else
               echo "Warning: Nazca path not found: $NAZCA_PATH"
             fi
             
             # Launch VSCode in the nazca_imos directory
-            echo "Opening VSCode in ~/Documents/Repos/nazca_imos"
-            code ~/Documents/Repos/nazca_imos &
-
+            echo "Opening VSCode in $NAZCAIMOS_PATH"
+            code $NAZCAIMOS_PATH &
+            cd "$NAZCAIMOS_PATH"
+            echo "Installing nazca_imos from $NAZCAIMOS_PATH"
+            python -m pip install -e .
             echo "Development environment ready"
           '';
         };
