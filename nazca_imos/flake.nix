@@ -72,6 +72,8 @@
           buildInputs = [
             pythonEnv
             pkgs.git
+            pkgs.bashInteractive
+            pkgs.klayout
           ];
           
           shellHook = ''
@@ -95,7 +97,27 @@
             
             # Make Python tools find packages in development mode
             export PYTHONPATH="$PWD:$PYTHONPATH"
-            
+
+            # Set up KLayout Python integration
+            KLAYOUT_PATH=$(which klayout)
+            KLAYOUT_DIR=$(dirname "$KLAYOUT_PATH")
+            if [ -d "$KLAYOUT_DIR/../lib/pymod" ]; then
+              export KLAYOUT_PYTHONPATH="$KLAYOUT_DIR/../lib/pymod"
+              export PYTHONPATH="$KLAYOUT_PYTHONPATH:$PYTHONPATH"
+              echo "KLayout Python modules available at $KLAYOUT_PYTHONPATH"
+            else
+              echo "Warning: KLayout Python modules not found at $KLAYOUT_DIR/../lib/pymod"
+              
+              # Try the alternative location as fallback
+              if [ -d "$KLAYOUT_DIR/../lib/python" ]; then
+                export KLAYOUT_PYTHONPATH="$KLAYOUT_DIR/../lib/python"
+                export PYTHONPATH="$KLAYOUT_PYTHONPATH:$PYTHONPATH"
+                echo "KLayout Python modules available at $KLAYOUT_PYTHONPATH"
+              else
+                echo "Warning: KLayout Python modules not found"
+              fi
+            fi
+
             # Install nazca in development mode if it exists
             NAZCA_PATH=~/Documents/Apps/nazca-0.6.1
             NAZCAIMOS_PATH=~/Documents/Repos/nazca_imos

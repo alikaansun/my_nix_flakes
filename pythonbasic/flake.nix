@@ -40,7 +40,8 @@
         devShells.default = pkgs.mkShell {
           buildInputs = [
             pythonEnv
-            pkgs.which # Help with debugging path issues
+            pkgs.which
+            pkgs.bashInteractive # Help with debugging path issues
           ];
           
           shellHook = ''

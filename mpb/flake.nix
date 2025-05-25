@@ -44,6 +44,7 @@
             pkgs.which # Help with debugging path issues
             pkgs.mpb
             pkgs.h5utils
+            pkgs.bashInteractive
           ];
           
           shellHook = ''
