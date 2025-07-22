@@ -119,7 +119,7 @@
             fi
 
             # Install nazca in development mode if it exists
-            NAZCA_PATH=~/Documents/Apps/nazca-0.6.1
+            NAZCA_PATH=~/Nextcloud/AppData/Packages/nazca-0.6.1/
             NAZCAIMOS_PATH=~/Documents/Repos/nazca_imos
       
             # Check if nazca is already installed
