@@ -16,10 +16,12 @@
         pythonEnv = pkgs.python313.withPackages (ps: with ps; [
           decorator
           ipython
+          ipympl
           ipykernel
           jupyter
           jupyterlab
           notebook
+          pyautogui
           kiwisolver
           matplotlib
           matplotlib-inline

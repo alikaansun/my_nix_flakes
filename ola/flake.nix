@@ -1,5 +1,5 @@
 {
-  description = "Python 3.11 development environment for ola project with Jupyter notebook support";
+  description = "Python development environment for ola project with Jupyter notebook support";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -13,35 +13,32 @@
           inherit system;
         };
         
-        pythonEnv = pkgs.python311.withPackages (ps: with ps; [
+        pythonEnv = pkgs.python313.withPackages (ps: with ps; [
           # Core Python packages from your environment.yml
           numpy
           pandas
           matplotlib
           seaborn
           scikit-rf
-          
           # Jupyter and IPython packages
           ipython
+          ipympl
           ipykernel
           jupyter
           jupyterlab
           notebook
-          jupyter-client
-          jupyter-core
+          matplotlib-inline
           
           # Additional dependencies
-          asttokens
           pip
           setuptools
           wheel
           
           # Common scientific packages
           scipy
-          matplotlib-inline
           
-          # Note: pywin32 is Windows-specific and not needed on Linux/macOS
-          # ipympl might need to be installed via pip in the shell hook if not available in nixpkgs
+          # Note: Using Python 3.13 instead of 3.11 to avoid tkinter build issues
+          # scikit-rf will be installed via pip if needed since it's not in nixpkgs or has conflicts
         ]);
       in
       {
@@ -55,9 +52,9 @@
           shellHook = ''
             echo "Ola project development environment activated"
             echo "Python version: $(python --version)"
-
-            # Install ipympl if not available in nixpkgs
-            pip install --user ipympl
+            
+            # Set matplotlib to use non-interactive backend to avoid tkinter issues
+            export MPLBACKEND=Agg
             
             # Create a directory for Jupyter notebooks if it doesn't exist
             mkdir -p notebooks
@@ -81,7 +78,7 @@
             
             # Launch VSCode
             echo "Opening VSCode"
-            code . &
+            code ~/Documents/Repos/imos-eopm-measurements &
             
             # Define cleanup function
             cleanup() {
