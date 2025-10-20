@@ -20,6 +20,7 @@
           matplotlib
           seaborn
           scikit-rf
+          tqdm
           # Jupyter and IPython packages
           ipython
           ipympl
@@ -28,7 +29,7 @@
           jupyterlab
           notebook
           matplotlib-inline
-          
+          pyqt5
           # Additional dependencies
           pip
           setuptools
