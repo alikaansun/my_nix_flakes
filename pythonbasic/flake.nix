@@ -26,6 +26,7 @@
           matplotlib
           matplotlib-inline
           numpy
+          numpy-stl
           pandas
           pip # Ensure pip is explicitly included
           scipy
@@ -47,6 +48,18 @@
           ];
           
           shellHook = ''
+            # Create and set up a virtual environment directory for editable installs
+            export VIRTUAL_ENV_DISABLE_PROMPT=1
+            
+            # Make pip install packages to the local directory
+            mkdir -p .pip
+            export PIP_PREFIX="$PWD/.pip"
+            export PYTHONPATH="$PIP_PREFIX/${pkgs.python313.sitePackages}:$PYTHONPATH"
+            export PATH="$PIP_PREFIX/bin:$PATH"
+            
+            # Make Python tools find packages in development mode
+            export PYTHONPATH="$PWD:$PYTHONPATH"
+
             echo "Python basic development environment activated"
             echo "Python version: $(python --version)"
           
