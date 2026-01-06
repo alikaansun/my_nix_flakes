@@ -34,7 +34,7 @@
           pip
           setuptools
           wheel
-          
+          openpyxl
           # Common scientific packages
           scipy
           
@@ -78,8 +78,8 @@
             echo ""
             
             # Launch VSCode
-            echo "Opening VSCode"
-            code ~/Documents/Repos/imos-eopm-measurements &
+            #echo "Opening VSCode"
+            #code ~/Documents/Repos/imos-eopm-measurements &
             
             # Define cleanup function
             cleanup() {

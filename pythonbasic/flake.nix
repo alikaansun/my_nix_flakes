@@ -37,6 +37,7 @@
           wheel # Useful for package building
           pyclipper
           pyyaml
+          openpyxl
         ]);
       in
       {
@@ -83,9 +84,6 @@
             echo "4. Enter the URL printed above with the token"
             echo ""
             
-            # Launch VSCode
-            echo "Opening VSCode"
-            code . &
             
             # Define cleanup function
             cleanup() {
