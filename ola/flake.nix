@@ -21,6 +21,8 @@
           seaborn
           scikit-rf
           tqdm
+          pyvisa-py
+          gpib-ctypes
           # Jupyter and IPython packages
           ipython
           ipympl
